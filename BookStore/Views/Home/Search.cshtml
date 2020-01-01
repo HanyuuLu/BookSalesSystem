@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+<h1>@ViewData["Title"]</h1>
+<form method="get">
+    <table>
+        <tr>
+            <td>
+                title
+            </td>
+            <td>
+                author
+            </td>
+            <td>
+                ISBN number
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <input name="title" class="input-group-text">
+            </td>
+            <td>
+                <input name="author" class="input-group-text">
+            </td>
+            <td>
+                <input name="isbn" class="input-group-text">
+            </td>
+            <td>
+                <input value="submit" type="submit" asp-area="" asp-controller="Home" asp-action="Search" class="btn-primary">
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<table class="table">
+    @if (ViewData["res"] != null)
+    {
+        <tr class="text-info">
+            <td>
+                title
+            </td>
+            <td>
+                author
+            </td>
+            <td>
+                isbn number
+            </td>
+        </tr>
+        @foreach (Book book in ViewData["res"] as List<Book>)
+        {
+            <tr>
+                <td>
+                    @*<a asp-area="" asp-controller="home" asp-action="BookInformationn">@book.title</a>*@
+                    <a href="/Home/BookInformation?isbn=@book.isbn">@book.title</a>
+                </td>
+                <td>
+                    @book.author
+                </td>
+                <td>
+                    @book.isbn
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+@section scripts
+{
+
+}

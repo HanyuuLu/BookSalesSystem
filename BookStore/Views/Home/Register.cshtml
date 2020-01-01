@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post">
+        <p>username</p>
+        <input name="username" class="input-group-text" />
+        <p>password</p>
+        <input name="password" type="password" class="input-group-text" />
+        <p>confirm password again</p>
+        <input name="confirmPassword" type="password" class="input-group-text" />
+        <br />
+        <p class="alert-danger">@ViewData["msg"]</p>
+        <br />
+        <input value="commit" type="submit" asp-area="" asp-controller="Home" asp-action="Register" class="btn-primary" />
+    </form>
+
+</div>
+@section scripts {
+
+}

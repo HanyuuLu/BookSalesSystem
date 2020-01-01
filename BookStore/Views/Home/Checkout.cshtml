@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Checkout";
+}
+<h1>@ViewData["Title"]</h1>
+@if (ViewData["msg"] != null)
+{
+    <p class="alert-danger">@ViewData["msg"]</p>
+}
+@if (ViewData["status"] !=null && ViewData["status"] as string == "confirm")
+{
+    <form>
+        <div>credict card</div>
+        <input type="text" name="cardNumber" class="input-group-text" />
+        <div>address</div>
+        <input type="text" name="address" class="input-group-text" />
+        <br />
+        <input type="submit" formmethod="post" value="commit" class="btn-primary" />
+    </form>
+}
+@if (ViewData["res"]!=null)
+{
+<table class="table">
+    <tr class="text-info">
+        <td>
+            title
+        </td>
+        <td>
+            author
+        </td>
+        <td>
+            isbn number
+        </td>
+        <td>
+            quantity
+        </td>
+    </tr>
+    @foreach (Book book in ViewData["res"] as List<Book>)
+    {
+        <tr>
+            <td>
+                @*<a asp-area="" asp-controller="home" asp-action="BookInformationn">@book.title</a>*@
+                <a href="/Home/BookInformation?isbn=@book.isbn">@book.title</a>
+            </td>
+            <td>
+                @book.author
+            </td>
+            <td>
+                @book.isbn
+            </td>
+            <td>
+                <b id="quantity_@book.isbn">@book.quantity</b>
+            </td>
+        </tr>
+    }
+</table>
+}
+@if (ViewData["status"] == null)
+{
+    <form>
+        <input type="submit" value="confirm" formmethod="post" asp-area="" asp-controller="Home" asp-action="Checkout" class="btn-primary" />
+    </form>
+}
+@section scripts
+{
+
+}

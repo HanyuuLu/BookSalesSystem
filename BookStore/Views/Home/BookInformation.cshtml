@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["_Title"] = "BookInformation";
+}
+<h1>@ViewData["_Title"]</h1>
+@if (ViewData["msg"]!=null)
+{
+    <div class="alert-danger">@ViewData["msg"]</div>
+}
+@if  (ViewData["isbn"]!=null)
+{
+<table class="table">
+    <tr>
+        <td>
+            title
+        </td>
+        <td>
+            author
+        </td>
+        <td>
+            ISBN number
+        </td>
+        <td>
+            available time
+        </td>
+        <td>
+            add to shopping basket
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewData["title"]
+        </td>
+        <td>
+            @ViewData["author"]
+        </td>
+        <td>
+            @ViewData["isbn"]
+        </td>
+        <td>
+            @ViewData["available"]
+        </td>
+        <td>
+            <input type="submit" value="add" onclick=add("@ViewData["isbn"]") class="btn-primary") />
+        </td>
+    </tr>
+</table>
+}
+<script>
+    function add(isbn)
+    {
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open('POST', `/Home/BookInformation`, true);
+        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpRequest.send(`isbn=${isbn}`)
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState==4 && httpRequest.status == 200) {
+                alert(`${isbn} was added to shopping basket.`)
+            }
+            else {
+                if (httpRequest.readyState == 4) {
+                    alert("Oops, something wrong happened.");
+                }
+            }
+        }
+    }
+</script>
+
+@section scripts
+{
+
+}
