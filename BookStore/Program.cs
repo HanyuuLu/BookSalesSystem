@@ -13,7 +13,15 @@ namespace BookStore
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error:{e.Message}");
+                Console.WriteLine("请检查数据库链接和端口是否被占用");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
